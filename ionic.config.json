@@ -1,0 +1,7 @@
+{
+  "name": "My-money-ui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
