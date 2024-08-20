@@ -1,3 +1,33 @@
-<p>
-  main-layout works!
-</p>
+<div class="vh-100">
+  <router-outlet></router-outlet>
+  <!-- bottom nav bar -->
+  <div
+    class="container position-fixed bottom-0 start-0 end-0 w-100 py-1">
+    <div class="row px-1 border border-top">
+      <div routerLinkActive="active p-2" class="col rounded p-1">
+        <a class="d-flex flex-column align-items-center" routerLink="/home">
+          <i class="bi bi-house-door-fill fs-3"></i>
+          <span class="nav-text">Home</span>
+        </a>
+      </div>
+      <div routerLinkActive="active p-2" class="col rounded p-1">
+        <a class="d-flex flex-column align-items-center" routerLink="/activity">
+          <i class="bi bi-activity fs-3"></i>
+          <span class="nav-text">Activity</span>
+        </a>
+      </div>
+      <div routerLinkActive="active p-2" class="col rounded p-1">
+        <a class="d-flex flex-column align-items-center" routerLink="/transactions">
+          <i class="bi bi-coin fs-3"></i>
+          <span class="nav-text">Transactions</span>
+        </a>
+      </div>
+      <div routerLinkActive="active p-2" class="col rounded p-1">
+        <a class="d-flex flex-column align-items-center" routerLink="/account">
+          <i class="bi bi-person-lock fs-3"></i>
+          <span class="nav-text">Account</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

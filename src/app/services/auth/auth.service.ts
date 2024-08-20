@@ -40,6 +40,16 @@ export class AuthService {
     return await this.userDetails;
   }
 
+
+
+  // create user 
+
+  userLogin(data: any) {
+    const url = `${this.settings.API_BASE_URL}/user/login`;
+    return lastValueFrom(this.http.post(url, data));
+  }
+
+
   isLoggedIn() {
     return this.token.isTokenExist();
   }

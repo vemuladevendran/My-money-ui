@@ -1,29 +1,39 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-
   private tokenKey = 'AUTH_TOKEN';
 
-  constructor() { }
-
-  saveToken(data: any) {
-    localStorage.setItem(this.tokenKey, data);
+  constructor(private storage: Storage) {
+    this.init();
   }
 
-  getToken() {
-    return localStorage.getItem(this.tokenKey);
+  // Initialize the storage
+  async init() {
+    await this.storage.create();
   }
 
+  async saveToken(data: any) {
+    try {
+      await this.storage.set(this.tokenKey, data);
+    } catch (error) {
+      console.log('fail to save data');
+    }  }
 
-  isTokenExist() {
-    return !!this.getToken();
+  async getToken(): Promise<string | null> {
+    return await this.storage.get(this.tokenKey);
   }
 
-  removeToken() {
-    localStorage.removeItem(this.tokenKey);
+  async isTokenExist(): Promise<boolean> {
+    const token = await this.getToken();
+    return !!token;
+  }
+
+  async removeToken() {
+    await this.storage.remove(this.tokenKey);
   }
 
   async getTokenData(): Promise<any> {
