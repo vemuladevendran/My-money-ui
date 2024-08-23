@@ -1,0 +1,28 @@
+.profile_img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 4rem;
+}
+
+.group-icon {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: -0.2rem;
+}
+
+.recent-card {
+    width: 2rem;
+    height: 2rem;
+}
+
+.card-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.group-list-wrapper{
+    border-radius: 5rem 5rem 0 0;
+}
