@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { GroupsListComponent } from "../../components/groups-list/groups-list.component";
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     IonicModule,
-    GroupsListComponent
+    GroupsListComponent,
+    RouterModule
   ],
 })
 export class HomeComponent implements OnInit {

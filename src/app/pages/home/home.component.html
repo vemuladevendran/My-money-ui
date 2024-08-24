@@ -1,82 +1,67 @@
-<div class="conatiner h-100">
-  <div class="row p-3">
-    <div class="col-12">
-      <!-- profile details -->
-      <div class="row">
-        <div class="col-6">
-          <img
-            class="profile_img"
-            src="/assets/icon/favicon.png"
-            alt="Profile"
-          />
-        </div>
-        <div class="col-6">
-          <!-- new group btn -->
-          <div class="text-end">
-            <button class="btn app-bg-secondary px-3 position-relative fw-bold">
-              New Group
-              <i
-                class="bi bi-plus-circle-fill app-text-primary fs-3 group-icon"
-              ></i>
-            </button>
+<ion-content class="ion-padding">
+  <div class="conatiner h-100">
+    <!-- Profile and New Group Button -->
+    <div class="row p-3">
+      <div class="col-6">
+        <img class="profile_img" src="/assets/icon/favicon.png" alt="Profile" />
+      </div>
+      <div class="col-6 text-end">
+        <ion-button color="dark" class="fw-bold" routerLink="/create-group">
+          <ion-icon name="add-circle-outline" class="fs-3"></ion-icon>
+          Add Group
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Total Balance -->
+    <div class="mt-3">
+      <p class="mb-0">Total Balance</p>
+      <p class="fw-bold fs-3">$5235.00</p>
+    </div>
+
+    <!-- Balance Cards -->
+    <div class="row justify-content-around">
+      <div class="col-5 rounded py-1 px-3 app-bg-primary">
+        <small class="mb-0">You owe</small>
+        <p class="fw-bold">$145.00</p>
+      </div>
+      <div class="col-5 rounded py-1 px-3 app-bg-primary">
+        <small class="mb-0">Owes you</small>
+        <p class="fw-bold">$145.00</p>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <p class="fw-bold">Recent transactions</p>
+    <div class="row gy-2 justify-content-around">
+      <div *ngFor="let i of [1, 2, 3, 4]" class="col-6">
+        <ion-card class="p-2 rounded d-flex flex-wrap">
+          <div class="col-7 card-name">Trip hsfbshbfhbjbj</div>
+          <div class="col-5 text-center">
+            <img
+              src="/assets/icon/favicon.png"
+              alt="trip"
+              class="recent-card"
+            />
           </div>
-        </div>
-      </div>
-      <!-- total balance -->
-      <div class="mt-3">
-        <p class="mb-0">Total Balance</p>
-        <p class="fw-bold fs-3">$5235.00</p>
-      </div>
-      <!-- balance cards -->
-      <div class="row justify-content-around">
-        <div class="col-5 rounded py-1 px-3 app-bg-primary">
-          <small class="mb-0">You owe</small>
-          <p class="fw-bold">$145.00</p>
-        </div>
-        <div class="col-5 rounded py-1 px-3 app-bg-primary">
-          <small class="mb-0">Owes you</small>
-          <p class="fw-bold">$145.00</p>
-        </div>
-      </div>
-      <!-- recent transactions-->
-      <p class="fw-bold">Recent transactions</p>
-      <!-- recent card -->
-      <div class="row gy-2 justify-content-around">
-        <div *ngFor="let i of [1, 2, 3, 4]" class="col-6">
-          <div class="p-2 rounded app-bg-secondary d-flex flex-wrap">
-            <div class="col-7 card-name">Trip hsfbshbfhbjbj</div>
-            <div class="col-5 text-center">
-              <img
-                src="/assets/icon/favicon.png"
-                alt="trip"
-                class="recent-card"
-              />
-            </div>
-            <div class="col-12">
-              <p class="app-text-primary mb-0" style="font-size: 10px">
-                You own
-              </p>
-              <p class="fw-bold mb-0">$450</p>
-            </div>
+          <div class="col-12">
+            <p class="app-text-primary mb-0" style="font-size: 10px">You own</p>
+            <p class="fw-bold mb-0">$450</p>
           </div>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- Groups Section -->
+    <div class="row h-100">
+      <div class="col-12 h-100">
+        <div class="h-100 p-3">
+          <p class="fw-bold fs-3 mb-0 text-center">______</p>
+          <h3>Groups</h3>
+          <!-- Groups List Component -->
+          <app-groups-list></app-groups-list>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- groups -->
-  <!-- list of groups -->
-
-  <div class="row h-100">
-    <div class="col-12 h-100 group-list-wrapper app-bg-secondary">
-      <div class="h-100 p-3">
-        <p class="fw-bold fs-3 mb-0 text-center">______</p>
-        <h3>Groups</h3>
-        <!-- groups card component -->
-         <app-groups-list />
-      </div>
-    </div>
-  </div>
-</div>
-
-
+</ion-content>
