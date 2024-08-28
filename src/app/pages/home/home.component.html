@@ -6,12 +6,13 @@
         <img class="profile_img" src="/assets/icon/favicon.png" alt="Profile" />
       </div>
       <div class="col-6 text-end">
-        <ion-button color="dark" class="fw-bold" routerLink="/create-group">
+        <ion-button color="dark" class="fw-bold" (click)="openModel()">
           <ion-icon name="add-circle-outline" class="fs-3"></ion-icon>
           Add Group
         </ion-button>
       </div>
     </div>
+    <app-create-group [modelStatus]="isModalOpen" (closeModal)="handleCloseModal($event)"></app-create-group>
 
     <!-- Total Balance -->
     <div class="mt-3">

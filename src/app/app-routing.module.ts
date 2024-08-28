@@ -5,7 +5,6 @@ import { SignupComponent } from './pages/auth/signup/signup.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './services/auth/auth.guard';
-import { CreateGroupComponent } from './pages/create-group/create-group.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,7 +26,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponent },
-      { path: 'create-group', component: CreateGroupComponent },
       {
         path: '**',
         redirectTo: 'home',

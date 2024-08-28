@@ -24,7 +24,10 @@ export class TokenService {
     }  }
 
   async getToken(): Promise<string | null> {
-    return await this.storage.get(this.tokenKey);
+    const data = await this.storage.get(this.tokenKey);
+    console.log(data);
+    return data
+    
   }
 
   async isTokenExist(): Promise<boolean> {

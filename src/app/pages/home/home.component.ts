@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupsListComponent } from "../../components/groups-list/groups-list.component";
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { CreateGroupComponent } from "../create-group/create-group.component";
 
 @Component({
   selector: 'app-home',
@@ -13,12 +14,22 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     IonicModule,
     GroupsListComponent,
-    RouterModule
-  ],
+    RouterModule,
+    CreateGroupComponent
+],
 })
 export class HomeComponent implements OnInit {
-
+  isModalOpen: boolean = false;
   constructor() { }
+
+  handleCloseModal(message: string) { 
+    this.isModalOpen = false;
+    console.log('Modal closed with message:', message); 
+  }
+
+  openModel(){
+    this.isModalOpen = true;
+  }
 
   ngOnInit() {}
 
