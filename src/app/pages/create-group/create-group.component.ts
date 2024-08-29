@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { GroupService } from 'src/app/services/group/group.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-create-group',
@@ -44,7 +45,8 @@ export class CreateGroupComponent {
   constructor(
     private fb: FormBuilder,
     private groupServe: GroupService,
-    private toastServe: ToastService
+    private toastServe: ToastService,
+    private loaderServe: LoaderService,
   ) {
     this.createGroupForm = this.fb.group({
       name: ['', Validators.required],
@@ -90,6 +92,7 @@ export class CreateGroupComponent {
   async onSubmit(): Promise<void> {
     try {
       if (this.createGroupForm.valid) {
+        this.loaderServe.showLoading();
         const formData = this.createGroupForm.value;
         const result = await this.groupServe.createGroup(formData);
         console.log(result);
@@ -99,6 +102,8 @@ export class CreateGroupComponent {
     } catch (error) {
       console.log(error);
       this.toastServe.presentToast('Failed to create Group');
+    }finally{
+      this.loaderServe.hideLoading();
     }
   }
 }
