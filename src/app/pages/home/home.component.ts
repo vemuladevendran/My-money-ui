@@ -4,6 +4,8 @@ import { GroupsListComponent } from "../../components/groups-list/groups-list.co
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { CreateGroupComponent } from "../create-group/create-group.component";
+import { GroupService } from 'src/app/services/group/group.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -20,17 +22,37 @@ import { CreateGroupComponent } from "../create-group/create-group.component";
 })
 export class HomeComponent implements OnInit {
   isModalOpen: boolean = false;
-  constructor() { }
+  groupListDetails:any[] = [];
+  constructor(
+    private groupServe: GroupService,
+    private toastServe: ToastService,
+  ) { }
 
   handleCloseModal(message: string) { 
     this.isModalOpen = false;
     console.log('Modal closed with message:', message); 
+    if(message === "success") this.getGroupDetails();
   }
 
   openModel(){
     this.isModalOpen = true;
   }
 
-  ngOnInit() {}
+
+  // get group details
+  async getGroupDetails():Promise<void>{
+    try {
+      const res:any = await this.groupServe.getAllActiveGroups();
+      console.log(res);
+      this.groupListDetails = res;
+    } catch (error) {
+      console.log(error);
+      this.toastServe.presentToast('Fail to load groups')
+    }
+  }
+
+  ngOnInit() {
+    this.getGroupDetails();
+  }
 
 }

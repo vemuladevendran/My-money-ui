@@ -1,20 +1,20 @@
 <div class="container h-100">
-  <div class="row justify-content-center h-100 group-card-wrapper">
+  <div class="row justify-content-center group-card-wrapper">
     <ion-card
       class="row p-2 my-3 rounded"
-      *ngFor="let i of [1, 2, 3, 4, 6, 7, 8]"
+      *ngFor="let g of groupData"
     >
       <div class="col-4">
         <img
           class="group-icon"
-          src="/assets/category/trip.png"
+          [src]="g?.groupImage"
           alt="Group Icon"
         />
       </div>
       <div class="col-8">
-        <h5>UG 851 Home</h5>
+        <h5 class="group-name">{{g?.groupName}}</h5>
         <small>you owns </small>
-        <small class="fw-bold app-text-primary"> $364</small>
+        <small class="fw-bold app-text-primary">{{g?.totalAmountYouOwe}}</small>
       </div>
     </ion-card>
   </div>

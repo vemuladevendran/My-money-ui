@@ -7,3 +7,10 @@
     padding-bottom: 6rem;
     overflow-y: scroll;
 }
+
+
+.group-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

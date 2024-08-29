@@ -25,7 +25,6 @@ export class TokenService {
 
   async getToken(): Promise<string | null> {
     const data = await this.storage.get(this.tokenKey);
-    console.log(data);
     return data
     
   }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { IonCard } from "@ionic/angular/standalone";
 
@@ -11,7 +11,7 @@ import { IonCard } from "@ionic/angular/standalone";
   standalone: true,
 })
 export class GroupsListComponent  implements OnInit {
-
+@Input() groupData: any
   constructor() { }
 
   ngOnInit() {}

@@ -22,4 +22,10 @@ export class GroupService {
     const url = `${this.settings.API_BASE_URL}/group`;
     return lastValueFrom(this.http.post(url, data));
   }
+
+
+  // get group details
+  getAllActiveGroups(){
+    const url = `${this.settings.API_BASE_URL}/group`;
+    return lastValueFrom(this.http.get(url));  }
 }
