@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { IonCard } from "@ionic/angular/standalone";
 
@@ -12,7 +13,14 @@ import { IonCard } from "@ionic/angular/standalone";
 })
 export class GroupsListComponent  implements OnInit {
 @Input() groupData: any
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
+
+
+  viewGroup(id: string) {
+    this.router.navigate([`/view-group/${id}`]);
+  }
 
   ngOnInit() {}
 

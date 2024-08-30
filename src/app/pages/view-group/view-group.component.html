@@ -1,0 +1,61 @@
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="row">
+      <ion-card class="col-12 row align-items-center py-2">
+        <div class="col-3 text-center">
+          <ion-avatar class="border">
+            <img [src]="groupDetails?.groupImage" alt="Group Image" />
+          </ion-avatar>
+        </div>
+        <div class="col-7">{{ groupDetails?.groupName }}</div>
+        <div class="col-2 text-end fs-2">
+          <ion-icon name="settings"></ion-icon>
+        </div>
+        <!-- over all balance details -->
+        <div class="col-12 mt-3">
+          <p class="mb-2">
+            Total Balance :
+            <span class="app-text-primary">{{
+              groupDetails?.totalBalance
+            }}</span>
+          </p>
+          <p class="mb-2">
+            You are owed :
+            <span class="app-text-primary">{{
+              groupDetails?.totalAmountYouAreOwed
+            }}</span>
+          </p>
+          <p class="mb-2">
+            You owe :
+            <span class="app-text-primary">{{
+              groupDetails?.totalAmountYouOwe
+            }}</span>
+          </p>
+        </div>
+      </ion-card>
+
+      <!-- different activity buttons -->
+
+      <div class="d-flex overflow-auto">
+        <div>
+          <ion-chip color="success">Bills</ion-chip>
+        </div>
+        <div>
+          <ion-chip>Balance</ion-chip>
+        </div>
+        <div>
+          <ion-chip>Total</ion-chip>
+        </div>
+        <div>
+          <ion-chip>Export</ion-chip>
+        </div>
+        <div>
+          <ion-chip>
+            <ion-label>Update</ion-label>
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-chip>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

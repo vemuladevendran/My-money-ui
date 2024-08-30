@@ -3,6 +3,7 @@
     <ion-card
       class="row p-2 my-3 rounded"
       *ngFor="let g of groupData"
+      (click)="viewGroup(g?.groupId)"
     >
       <div class="col-4">
         <img

@@ -27,5 +27,13 @@ export class GroupService {
   // get group details
   getAllActiveGroups(){
     const url = `${this.settings.API_BASE_URL}/group`;
-    return lastValueFrom(this.http.get(url));  }
+    return lastValueFrom(this.http.get(url));
+  
+  }
+ 
+  // get group details by id
+  getGroupDetailsById(id: string){
+    const url = `${this.settings.API_BASE_URL}/group/${id}`;
+    return lastValueFrom(this.http.get(url));
+  }
 }
