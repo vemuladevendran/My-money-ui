@@ -28,7 +28,6 @@ export class AuthService {
       GoogleAuth.initialize();
     }
 
-    
     this.platform.ready().then(() => {
       GoogleAuth.initialize();
     });
@@ -40,15 +39,12 @@ export class AuthService {
     return await this.userDetails;
   }
 
-
-
-  // create user 
+  // create user
 
   userLogin(data: any) {
     const url = `${this.settings.API_BASE_URL}/user/login`;
     return lastValueFrom(this.http.post(url, data));
   }
-
 
   isLoggedIn() {
     return this.token.isTokenExist();
@@ -57,5 +53,16 @@ export class AuthService {
   logout() {
     this.token.removeToken();
     this.router.navigate(['/login']);
+  }
+
+  getUsersList(filters: any) {
+    const url = `${this.settings.API_BASE_URL}/user/search`;
+    return lastValueFrom(
+      this.http.get(url, {
+        params: {
+          ...filters,
+        },
+      })
+    );
   }
 }

@@ -1,38 +1,42 @@
 <ion-content class="ion-padding">
   <div class="container">
     <div class="row">
-      <ion-card class="col-12 row align-items-center py-2">
-        <div class="col-3 text-center">
-          <ion-avatar class="border">
-            <img [src]="groupDetails?.groupImage" alt="Group Image" />
-          </ion-avatar>
-        </div>
-        <div class="col-7">{{ groupDetails?.groupName }}</div>
-        <div class="col-2 text-end fs-2">
-          <ion-icon name="settings"></ion-icon>
-        </div>
+      <div class="col-12">
+        <ion-card class="row align-items-center py-2">
+          <div class="col-3 text-center">
+            <ion-avatar class="border">
+              <img [src]="groupDetails?.groupImage" alt="Group Image" />
+            </ion-avatar>
+          </div>
+          <div class="col-7">{{ groupDetails?.groupName }}</div>
+          <div class="col-2 text-end fs-2">
+            <ion-icon name="settings"></ion-icon>
+          </div>
+        </ion-card>
         <!-- over all balance details -->
-        <div class="col-12 mt-3">
-          <p class="mb-2">
-            Total Balance :
-            <span class="app-text-primary">{{
-              groupDetails?.totalBalance
-            }}</span>
-          </p>
-          <p class="mb-2">
-            You are owed :
-            <span class="app-text-primary">{{
-              groupDetails?.totalAmountYouAreOwed
-            }}</span>
-          </p>
-          <p class="mb-2">
-            You owe :
-            <span class="app-text-primary">{{
-              groupDetails?.totalAmountYouOwe
-            }}</span>
-          </p>
-        </div>
-      </ion-card>
+        <ion-card class="row py-2 mt-3">
+          <div class="col-12">
+            <p class="mb-2">
+              Total Balance :
+              <span class="app-text-primary">{{
+                groupDetails?.totalBalance
+              }}</span>
+            </p>
+            <p class="mb-2">
+              You are owed :
+              <span class="app-text-primary">{{
+                groupDetails?.totalAmountYouAreOwed
+              }}</span>
+            </p>
+            <p class="mb-2">
+              You owe :
+              <span class="app-text-primary">{{
+                groupDetails?.totalAmountYouOwe
+              }}</span>
+            </p>
+          </div>
+        </ion-card>
+      </div>
 
       <!-- different activity buttons -->
 
@@ -56,6 +60,19 @@
           </ion-chip>
         </div>
       </div>
+
+      <!-- add new group member button -->
+      <div class="text-center py-3 mt-4" *ngIf="groupDetails?.members.length === 1">
+        <p>You are the only member in group so add more peoples</p>
+        <ion-chip color="success" class="py-2" (click)="openAddMemberDialog()">
+          <ion-label>Add New Member</ion-label>
+          <ion-icon name="person-add-outline"></ion-icon>
+        </ion-chip>
+      </div>
     </div>
   </div>
+
+<!-- external pages -->
+<app-add-group-member [modelStatus]="isAddMemberDialogOpen" (closeModal)="handleCloseModal($event)"></app-add-group-member>
 </ion-content>
+

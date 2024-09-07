@@ -4,17 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { GroupService } from 'src/app/services/group/group.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { AddGroupMemberComponent } from '../add-group-member/add-group-member.component';
 
 @Component({
   selector: 'app-view-group',
   templateUrl: './view-group.component.html',
   styleUrls: ['./view-group.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, AddGroupMemberComponent],
 })
 export class ViewGroupComponent implements OnInit {
+
   groupId: string = '';
   groupDetails:any;
+  isAddMemberDialogOpen: boolean = false;
   constructor(
     private loaderServe: LoaderService,
     private route: ActivatedRoute,
@@ -34,6 +37,16 @@ export class ViewGroupComponent implements OnInit {
     } finally {
       this.loaderServe.hideLoading();
     }
+  }
+
+  handleCloseModal(message: string) {
+    this.isAddMemberDialogOpen = false;
+    console.log('Modal closed with message:', message);
+  }
+
+
+  openAddMemberDialog() {
+    this.isAddMemberDialogOpen = true;
   }
 
   ngOnInit() {

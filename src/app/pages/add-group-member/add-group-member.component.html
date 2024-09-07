@@ -1,0 +1,28 @@
+<ion-modal [isOpen]="modelStatus" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+    <div>
+      <ion-button fill="clear" color="dark" (click)="close()">Close</ion-button>
+    </div>
+
+    <!-- main content -->
+    <ion-content class="ion-padding">
+      <div class="container">
+        <div class="row">
+          <!-- user input field -->
+          <div class="col-12">
+            <p>Add new members to group</p>
+            <form [formGroup]="userForm">
+              <ion-input
+                formControlName="userId"
+                label="Enter User ID"
+                label-placement="floating"
+                fill="outline"
+                placeholder="Enter User ID"
+              ></ion-input>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

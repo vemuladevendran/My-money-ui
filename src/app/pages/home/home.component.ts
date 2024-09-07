@@ -7,6 +7,8 @@ import { CreateGroupComponent } from '../create-group/create-group.component';
 import { GroupService } from 'src/app/services/group/group.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { TokenService } from 'src/app/services/token/token.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,10 +26,13 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 export class HomeComponent implements OnInit {
   isModalOpen: boolean = false;
   groupListDetails: any[] = [];
+  profileData: any;
   constructor(
     private groupServe: GroupService,
     private toastServe: ToastService,
-    private loaderServe: LoaderService
+    private loaderServe: LoaderService,
+    private tokenServe: TokenService,
+    private authServe: AuthService
   ) {}
 
   handleCloseModal(message: string) {
@@ -43,19 +48,30 @@ export class HomeComponent implements OnInit {
   // get group details
   async getGroupDetails(): Promise<void> {
     try {
-      this.loaderServe.showLoading();
       const res: any = await this.groupServe.getAllActiveGroups();
       console.log(res);
       this.groupListDetails = res;
     } catch (error) {
       console.log(error);
       this.toastServe.presentToast('Fail to load groups');
-    } finally {
-      this.loaderServe.hideLoading();
+    } 
+  }
+
+  async getProfileData(): Promise<void> {
+    try {
+      const data = await this.tokenServe.getTokenData();
+      this.profileData = data;
+    } catch (error) {
+      console.log(error);
     }
   }
 
+  logout() {
+    this.authServe.logout();
+  }
+
   ngOnInit() {
+    this.getProfileData();
     this.getGroupDetails();
   }
 }

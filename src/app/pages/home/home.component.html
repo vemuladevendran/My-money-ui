@@ -1,9 +1,10 @@
 <ion-content class="ion-padding">
   <div class="conatiner h-100">
     <!-- Profile and New Group Button -->
-    <div class="row p-3">
+    <div class="row align-items-center p-3">
       <div class="col-6">
-        <img class="profile_img" src="/assets/icon/favicon.png" alt="Profile" />
+        <img (click)="logout()" class="profile_img" [src]="profileData?.googleImg || '/assets/icon/favicon.png'" alt="Profile" />
+        <div class="fw-bold">{{profileData?.userId || 'User Not Found'}}</div>
       </div>
       <div class="col-6 text-end">
         <ion-button color="dark" class="fw-bold" (click)="openModel()">

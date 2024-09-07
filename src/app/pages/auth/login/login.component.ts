@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Device } from '@capacitor/device';
 import { TokenService } from 'src/app/services/token/token.service';
 import { PermissionsService } from 'src/app/services/permissions/permissions.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +19,8 @@ export class LoginComponent {
     private router: Router,
     private tokenServe: TokenService,
     private permissionServe: PermissionsService,
+    private loaderServe: LoaderService,
+    private toastServe: ToastService,
   ) {}
 
   // google sign option
@@ -40,6 +44,7 @@ export class LoginComponent {
           },
         ],
       };
+      this.loaderServe.showLoading();
       const res: any = await this.authServe.userLogin(data);
       this.tokenServe.saveToken(res?.token);
       // const contacts = await this.permissionServe.getContacts();
@@ -48,6 +53,9 @@ export class LoginComponent {
       this.router.navigate(['home']);
     } catch (error) {
       console.log(error);
+      this.toastServe.presentToast('Fail to login')
+    }finally{
+      this.loaderServe.hideLoading();
     }
   }
 }
