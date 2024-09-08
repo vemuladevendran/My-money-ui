@@ -36,4 +36,9 @@ export class GroupService {
     const url = `${this.settings.API_BASE_URL}/group/${id}`;
     return lastValueFrom(this.http.get(url));
   }
+
+  addGroupMembers(data: any, id: string){
+    const url = `${this.settings.API_BASE_URL}/group/add-member/${id}`;
+    return lastValueFrom(this.http.put(url, data));
+  }
 }

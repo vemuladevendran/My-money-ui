@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-group-member',
@@ -14,10 +14,13 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class AddGroupMemberComponent implements OnInit {
   @Input() modelStatus: boolean = false;
+  @Input() groupId = '';
   @Output() closeModal = new EventEmitter<string>();
   filters: any;
   userForm: FormGroup; // Reactive form
-  usersData: any = [];
+  usersData: any[] = [];
+  newMembersList: any[] = [];
+
   constructor(
     private authServe: AuthService,
     private fb: FormBuilder // FormBuilder for reactive form
@@ -47,10 +50,50 @@ export class AddGroupMemberComponent implements OnInit {
   async getUsers(filters: any): Promise<void> {
     try {
       const data = await this.authServe.getUsersList(filters);
-      this.usersData = data;
-      console.log(data, '==========');
+      // Check if data is an array and map it
+      if (Array.isArray(data)) {
+        // Initialize 'isAdded' flag to false for each user
+        this.usersData = data.map((user: any) => ({ ...user, isAdded: false }));
+      } else {
+        this.usersData = []; // Handle non-array case
+      }
     } catch (error) {
       console.log(error);
     }
   }
+
+  // Add new member
+  addNewMembers(user: any) {
+    // Clear input form
+    this.userForm.reset();
+    
+    // Add user to the newMembersList if not already added
+    if (!this.newMembersList.some((u) => u.user_id === user.user_id)) {
+      this.newMembersList.push(user);
+      // Mark user as added in usersData
+      this.usersData = this.usersData.map((u) =>
+        u.user_id === user.user_id ? { ...u, isAdded: true } : u
+      );
+    }
+  }
+
+  // Remove member from the newMembersList
+  removeMember(user: any) {
+    // Remove the user from newMembersList
+    this.newMembersList = this.newMembersList.filter(
+      (u) => u.user_id !== user.user_id
+    );
+    // Mark the user as not added in usersData
+    this.usersData = this.usersData.map((u) =>
+      u.user_id === user.user_id ? { ...u, isAdded: false } : u
+    );
+  }
+
+async addMembersToGroup():Promise<void>{
+  try {
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
 }

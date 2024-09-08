@@ -21,7 +21,43 @@
               ></ion-input>
             </form>
           </div>
+          <!-- newly added peoples -->
+          <div class="col-12 mt-2" *ngIf="newMembersList.length > 0">
+            <p>New Members : </p>
+            <ion-chip class="mx-1" *ngFor="let u of newMembersList" (click)="removeMember(u)">
+              <ion-avatar>
+                <img [alt]="u?.name" [src]="u?.googleImg" />
+              </ion-avatar>
+              <ion-label>{{ u?.name }}</ion-label>
+            </ion-chip>
+          </div>
+          <!-- matched peoples list -->
+          <div class="col-12 mt-2" *ngIf="usersData.length > 0">
+            <p>Matched Peoples List : </p>
+            <div class="d-flex px-1 flex-wrap">
+              <ion-chip
+                class="mx-1"
+                *ngFor="let u of usersData"
+                (click)="addNewMembers(u)"
+                [disabled]="u.isAdded"
+              >
+                <ion-avatar>
+                  <img [alt]="u?.name" [src]="u?.googleImg" />
+                </ion-avatar>
+                <ion-label>{{ u?.name }}</ion-label>
+              </ion-chip>
+            </div>
+          </div>
         </div>
+
+        <!-- add members button -->
+         <div class="col-12 mt-3">
+          <ion-button
+          expand="full"
+          [disabled]="newMembersList.length === 0"
+          >Add Members</ion-button
+        >
+         </div>
       </div>
     </ion-content>
   </ng-template>
