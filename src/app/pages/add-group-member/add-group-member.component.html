@@ -53,6 +53,7 @@
         <!-- add members button -->
          <div class="col-12 mt-3">
           <ion-button
+          (click)="addMembersToGroup()"
           expand="full"
           [disabled]="newMembersList.length === 0"
           >Add Members</ion-button

@@ -4,6 +4,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import { GroupService } from 'src/app/services/group/group.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-add-group-member',
@@ -23,7 +26,10 @@ export class AddGroupMemberComponent implements OnInit {
 
   constructor(
     private authServe: AuthService,
-    private fb: FormBuilder // FormBuilder for reactive form
+    private fb: FormBuilder,
+    private groupServe: GroupService,
+    private loaderServe: LoaderService,
+    private toastServe: ToastService,
   ) {
     this.userForm = this.fb.group({
       userId: [''], // Initialize userId control
@@ -91,9 +97,18 @@ export class AddGroupMemberComponent implements OnInit {
 
 async addMembersToGroup():Promise<void>{
   try {
+    if(this.groupId === '') return;
+    this.loaderServe.showLoading();
+    console.log(this.newMembersList, '============');
+    
+    const data = await this.groupServe.addGroupMembers(this.newMembersList, this.groupId);
+    console.log(data);
     
   } catch (error) {
     console.log(error);
+    this.toastServe.presentToast('Fail to Add Members')
+  }finally{
+    this.loaderServe.hideLoading();
   }
 }
 }
